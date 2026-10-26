@@ -1,0 +1,20 @@
+[Unit]
+Description=vLLM Qwen3.8-Flash-Next NVFP4 TP3+EP3 (3x RTX 4090 48GB)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=@REPO_DIR@
+Environment=PATH=@VENV@/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Environment=CUDA_HOME=/usr/local/cuda
+ExecStart=@REPO_DIR@/scripts/serve.sh
+Restart=on-failure
+RestartSec=10
+TimeoutStartSec=1200
+TimeoutStopSec=180
+KillSignal=SIGINT
+LimitNOFILE=65535
+
+[Install]
+WantedBy=default.target

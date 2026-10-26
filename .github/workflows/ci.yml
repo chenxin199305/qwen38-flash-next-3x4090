@@ -1,0 +1,30 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: shell syntax
+        run: |
+          for f in install.sh start.sh stop.sh check-weights.sh scripts/*.sh scripts/lib/*.sh; do
+            bash -n "$f"
+          done
+      - name: python syntax
+        run: |
+          python -m py_compile patches/*.py scripts/*.py benchmarks/*.py tests/*.py
+      - name: install test deps
+        run: pip install pytest ruff
+      - name: ruff (syntax / undefined names)
+        run: ruff check --select E9,F63,F7,F82 patches scripts benchmarks tests
+      - name: pytest
+        run: pytest -q
+      - name: secret scan
+        run: python tests/scan_secrets.py

@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-25",
+  "status": "recorded from the production host; not a fresh CI run",
+  "hardware": {
+    "gpu": "3x NVIDIA GeForce RTX 4090 48GB",
+    "gpu_memory_mib": 49140,
+    "driver": "570.153.02",
+    "cpu_arch": "x86_64",
+    "ram_gib": 256,
+    "disk": "1 TB"
+  },
+  "software": {
+    "vllm": "0.30.0",
+    "torch": "2.13.0+cu126",
+    "cuda": "12.8"
+  },
+  "model": {
+    "id": "<your-gated-checkpoint>",
+    "overlay": "FP8 hybrid side layers + FP8 MTP experts",
+    "context": 524288,
+    "yarn_factor": 2.0
+  },
+  "config": {
+    "tensor_parallel_size": 3,
+    "expert_parallel": true,
+    "expert_distribution": [171, 171, 170],
+    "mtp_k": 2,
+    "kv_cache_dtype": "fp8_e4m3",
+    "indexer_kv_dtype": "fp8",
+    "max_num_seqs": 16,
+    "gpu_memory_utilization": 0.96,
+    "prefix_caching": true
+  },
+  "results": {
+    "model_load_gib_per_gpu": 27.96,
+    "kv_gib_per_gpu": 15.67,
+    "kv_pool_tokens": 1011875,
+    "kv_concurrency_at_524k": 1.93,
+    "single_stream_tok_s": 124.3,
+    "aggregate_tok_s": {
+      "4": 387.4,
+      "8": 617.6,
+      "16": 635.3
+    }
+  },
+  "benchmark_method": {
+    "max_tokens": 256,
+    "ignore_eos": true,
+    "token_count": "usage.completion_tokens",
+    "warmup": true,
+    "note": "BF16-vs-FP8 MTP throughput is within measurement noise; the FP8 gain is KV capacity."
+  }
+}

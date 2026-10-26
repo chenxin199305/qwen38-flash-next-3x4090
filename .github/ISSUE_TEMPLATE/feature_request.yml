@@ -1,0 +1,23 @@
+name: Feature request
+description: Suggest a tuning profile, patch or documentation improvement
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is missing or hard to use?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What should change? Keep the 3x4090 TP3 scope in mind.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Logs, measurements, upstream links.

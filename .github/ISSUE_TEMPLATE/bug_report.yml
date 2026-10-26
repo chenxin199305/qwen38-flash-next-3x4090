@@ -1,0 +1,38 @@
+name: Bug report
+description: Something does not start, crashes, or produces wrong output
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please redact API keys, IP addresses and usernames.
+        Attach `./scripts/doctor.sh` output if possible.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: Command, expected result, actual result.
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: GPU model/memory, driver, CUDA, vLLM, torch, OS.
+      placeholder: |
+        3x RTX 4090 48GB, driver 570.153.02, CUDA 12.8
+        vLLM 0.30.0, torch 2.13.0+cu126
+    validations:
+      required: true
+  - type: textarea
+    id: config
+    attributes:
+      label: Config diff
+      description: The `.env` values that differ from `.env.sample`.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Relevant lines from `$LOG_DIR/vllm.log`.
+    validations:
+      required: true

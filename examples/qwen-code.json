@@ -1,0 +1,22 @@
+{
+  "modelProviders": {
+    "openai": [
+      {
+        "id": "qwen38-flash-next-nvfp4",
+        "baseUrl": "http://<server-ip>:12345/v1",
+        "envKey": "OPENAI_API_KEY"
+      }
+    ]
+  },
+  "env": {
+    "OPENAI_API_KEY": "<your-api-key-or-local-vllm>"
+  },
+  "security": {
+    "auth": {
+      "selectedType": "openai"
+    }
+  },
+  "model": {
+    "name": "qwen38-flash-next-nvfp4"
+  }
+}

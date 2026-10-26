@@ -1,0 +1,32 @@
+name: Hardware / performance report
+description: Share a successful or failed run on different 4090 cards
+labels: [performance]
+body:
+  - type: input
+    id: gpu
+    attributes:
+      label: GPU model and memory
+      placeholder: RTX 4090 48GB (49,140 MiB)
+    validations:
+      required: true
+  - type: input
+    id: driver
+    attributes:
+      label: Driver / CUDA
+      placeholder: 570.153.02 / 12.8
+    validations:
+      required: true
+  - type: textarea
+    id: config
+    attributes:
+      label: Config
+      description: MTP_K, context, max-num-seqs, KV dtype, GPU memory utilization.
+    validations:
+      required: true
+  - type: textarea
+    id: results
+    attributes:
+      label: Results
+      description: KV pool, single-stream tok/s, 4/8/16-way aggregate, command used.
+    validations:
+      required: true
